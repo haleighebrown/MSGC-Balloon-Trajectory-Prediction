@@ -1,9 +1,8 @@
 # MSGC-Balloon-Trajectory-Prediction Code
-This repository contains working versions of MSGC's Balloon Trajectory Prediction code. This code runs off of WRF output files of any increment (research suggests hourly is best). 
+This repository contains working versions of MSGC's Balloon Trajectory Prediction code. This code runs off of WRF output files (recommended hourly increment). 
 
 
-# MSGC-Balloon-Trajectory-Prediction Installation
-
+# Installation
 This installation guide expects that you have Anaconda install and are running on a Unix system (Linux or Mac)
 
 conda create --name pyn_env --channel conda-forge pynio python=2.7
