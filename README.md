@@ -8,7 +8,7 @@ This installation guide expects that you have Anaconda install and are running o
 | conda create --name pyn_env --channel conda-forge pynio python=2.7 |
 | --- |
 | source activate pyn_env |
-| --- |
+
 
 
 The conda create command will set up the create the python environment necessary for this prediction code
