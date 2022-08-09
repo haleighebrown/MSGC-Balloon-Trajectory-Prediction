@@ -9,20 +9,15 @@ BALLOON TRAJECTORY OVERALL COMPARISON VISUALIZATION TOOL:
 import matplotlib.pyplot as plt
 import pandas as pd
 import matplotlib.ticker as mticker
-
+plt.style.use('seaborn-whitegrid')
 
 #USER VARIABLES
-#"/home/wrf_user/Downloads/UM5_1710UTC_070622_GARY_Profile.txt"
-#"/home/wrf_user/Downloads/UM6_1700UTC_071322_ACE_profile.txt"
-
-radFile = "/home/wrf_user/Downloads/UM6_1700UTC_071322_ACE_profile.txt" #location of radiosonde profile data
+radFile = "/home/wrf_user/Downloads/UM5_1710UTC_070622_GARY_Profile.txt"#location of radiosonde profile data
 predFile = "/home/wrf_user/Desktop/Prediction.csv"                      #location of prediction data
 predTimesFile = "/home/wrf_user/Desktop/times.txt"                      #location of prediction times
 
-#7052
-#7165
+durationOL = 7052                                                       #duration of the observed launch (sec)
 
-durationOL = 7165                                                       #duration of the observed launch (sec)
 
 #READING IN RADIOSONDE PROFILE DATA 
 radDF = pd.read_csv(radFile, sep= "\t", skiprows = 18, encoding = 'unicode_escape')
@@ -37,7 +32,6 @@ radDF["Observed Geopotential"] = (radDF["Observed Geopotential"]).str.strip().as
 radDF["Time"] = (radDF["Time"]).str.strip().astype(float)
 radDF["Observed Longitude"] = (radDF["Observed Longitude"]).str.strip().astype(float)
 radDF["Observed Latitude"] = (radDF["Observed Latitude"]).str.strip().astype(float)
-
 
 #READING IN PREDICTION DATA AND GRABING ASSOCIATED TIMES
 predDF = pd.read_csv(predFile, sep= ",", skiprows=lambda x: (x != 0) and not x % 2, encoding = 'unicode_escape')

@@ -9,21 +9,16 @@ BALLOON TRAJECTORY GEOPOTENTIAL COMPARISON VISUALIZATION TOOL:
 import matplotlib.pyplot as plt
 import pandas as pd
 import matplotlib.ticker as mticker
-
+plt.style.use('seaborn-whitegrid')
 
 #USER VARIABLES
-#"/home/wrf_user/Downloads/UM5_1710UTC_070622_GARY_Profile.txt"
-#"/home/wrf_user/Downloads/UM6_1700UTC_071322_ACE_profile.txt"
-
-radFile = "/home/wrf_user/Downloads/UM6_1700UTC_071322_ACE_profile.txt" #location of radiosonde profile data
+radFile = "/home/wrf_user/Downloads/UM5_1710UTC_070622_GARY_Profile.txt" #location of radiosonde profile data
 predFile = "/home/wrf_user/Desktop/Prediction.csv"                      #location of prediction data
 predTimesFile = "/home/wrf_user/Desktop/times.txt"                      #location of prediction times
 
-#7052
-#7165
-
-durationOL = 7165                                                       #duration of the observed launch (sec)
+durationOL = 7052                                                       #duration of the observed launch (sec)
 startingGP = 980                                                        #starting GP/Alt (m)
+
 
 #READING IN RADIOSONDE PROFILE DATA 
 radDF = pd.read_csv(radFile, sep= "\t", skiprows = 18, encoding = 'unicode_escape')
@@ -61,9 +56,9 @@ plt.axvline(0, color = "black")
 observedBurst = radDF.loc[radDF["Observed Geopotential"].idxmax()]
 predictedBurst = predDF.loc[predDF["Predicted Geopotential"].idxmax()]
 plt.plot(observedBurst["Time"], observedBurst["Observed Geopotential"],"o:k", ms = 5)
-plt.text(observedBurst["Time"], observedBurst["Observed Geopotential"], str(round(observedBurst["Observed Geopotential"]/1000, 2)) + "km", {'ha': 'center'}, rotation = 45)
+plt.text(observedBurst["Time"]+50, observedBurst["Observed Geopotential"]+150, str(round(observedBurst["Observed Geopotential"]/1000, 2)) + "km", {'ha': 'left'}, rotation = 0)
 plt.plot(predictedBurst["pointTimes"], predictedBurst["Predicted Geopotential"], "o:k", ms = 5)
-plt.text(predictedBurst["pointTimes"], predictedBurst["Predicted Geopotential"], str(round(predictedBurst["Predicted Geopotential"]/1000, 2)) + "km", {'ha': 'center'}, rotation = 45)
+plt.text(predictedBurst["pointTimes"]+100, predictedBurst["Predicted Geopotential"], str(round(predictedBurst["Predicted Geopotential"]/1000, 2)) + "km", {'ha': 'left'}, rotation = 0)
 
 plt.xlim(0, max(observedBurst["Time"], predictedBurst["pointTimes"]) + 1000)
 plt.ylim(startingGP, max(observedBurst["Observed Geopotential"], predictedBurst["Predicted Geopotential"]) + 5000)
@@ -71,7 +66,6 @@ plt.ylim(startingGP, max(observedBurst["Observed Geopotential"], predictedBurst[
 plt.title("Observed vs. Predicted Balloon Geopotential")
 plt.xlabel("Time [sec]")
 plt.ylabel("Geopotential [m]")
-plt.grid()
 plt.show()
 
 

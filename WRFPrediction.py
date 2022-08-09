@@ -105,7 +105,8 @@ def Prediction(wrf_file, main_directory, start_lat, start_lon, start_alt, burstD
                 index = 0
         
         #retrive and print new lat and lon
-        current_lat, current_lon = Calculations.destination(distance/1000, w_dir, current_lat, current_lon) 
+        current_lat, current_lon = Calculations.destination(distance/1000, w_dir, current_lat, current_lon)
+         
         print(current_lat, current_lon)
 
         #while still ascending retrive new rise_rate/volume and increase by one ALT_INCREMENT
@@ -115,8 +116,8 @@ def Prediction(wrf_file, main_directory, start_lat, start_lon, start_alt, burstD
             rise_rate += w_vert 
          
             #this statments checks if the balloon should still be acsending or if decent should start based on the new volume of the balloon
-            if volume >= 4.0/3.0*math.pi*(float(burstDi)/200)**3+35:
-            #if current_alt >= 32000: 
+            #if volume >= 4.0/3.0*math.pi*(float(burstDi)/200)**3:  #+ 32: this line seems to under est. the bursting alt. further investigation required
+            if current_alt >= 32000: 
                 print('burst') 
                 ascent = False 
 

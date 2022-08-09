@@ -11,13 +11,13 @@ start_time = "17:00:00" #UTC
 burstDi = "602" #cm
 
 #WRF FILE AND DIRECTORY
-wrf_file = "wrfout_d02_2022-07-13_17:00:00" #UTC hour required
+wrf_file = "wrfout_d02_2022-07-06_17:00:00" #UTC hour required
 timeSpanOfWrfFile = 3600 #sec
 
 
 #/home/wrf_user/Desktop/070622Complete/em_real/
 #/home/wrf_user/WRF/WRF/test/em_real/
-main_directory = "/home/wrf_user/WRF/WRF/test/em_real/" #Change to directory where WRF outputs are
+main_directory = "/home/wrf_user/Desktop/070622Complete/em_real/" #Change to directory where WRF outputs are
 
 #PREDICTIONS
 points, times, rates = WRFPrediction.Prediction(wrf_file, main_directory, start_lat, start_lon, start_alt, burstDi, start_time, timeSpanOfWrfFile)
