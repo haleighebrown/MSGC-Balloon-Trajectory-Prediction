@@ -9,30 +9,33 @@ BALLOON TRAJECTORY RISE RATE COMPARISON VISUALIZATION TOOL:
 import matplotlib.pyplot as plt
 import pandas as pd
 import matplotlib.ticker as mticker
-
+plt.style.use('seaborn-whitegrid')
 
 #USER VARIABLES
-#"/home/wrf_user/Downloads/UM5_1710UTC_070622_GARY_Profile.txt"
-#"/home/wrf_user/Downloads/UM6_1700UTC_071322_ACE_profile.txt"
+radFile = "/home/wrf_user/Downloads/UM5_1710UTC_070622_GARY_Profile.txt" #location of radiosonde profile data
+predFile = "/home/wrf_user/Desktop/Prediction.csv"                       #location of prediction data
+predTimesFile = "/home/wrf_user/Desktop/times.txt"                       #location of prediction times
 
-radFile = "/home/wrf_user/Downloads/UM6_1700UTC_071322_ACE_profile.txt" #location of radiosonde profile data
-predRiseRatesFile = "/home/wrf_user/Desktop/rates.txt"                  #location of prediction rise rates
-predTimesFile = "/home/wrf_user/Desktop/times.txt"                      #location of prediction times
-
-#7052
-#7165
-
-durationOL = 7165                                                      #duration of the observed launch (sec)
-
+durationOL = 7052                                                        #duration of the observed launch (sec)
+   
+                                                 
+predRiseRatesFile = "/home/wrf_user/Desktop/rates.txt"
 #READING IN RADIOSONDE PROFILE DATA 
 radDF = pd.read_csv(radFile, sep= "\t", skiprows = 18, encoding = 'unicode_escape')
 
 #RENAMING RADIOSONDE DATA COLUMNS AND FILTERING OUT BLANK END ROWS
 radDF.rename(columns={radDF.columns.values[15] : "Observed Rise Rates", radDF.columns.values[0] : "Time"}, inplace=True)
+
 radDF = radDF.iloc[1:durationOL + 2, :]
 pd.options.mode.chained_assignment = None  # default='warn'
 
-#CONVERTING COLUMNS FROM STRING TO FLOAT FORMAT
+#CONVERTING COLUMNS FROM STRING TO FLOAT FORMAT AND CLEANING DATA
+radDF["Observed Rise Rates"] = (radDF["Observed Rise Rates"]).str.strip()
+
+
+#radDF[radDF["Observed Rise Rates"] == "-"] = "0.0"
+
+radDF = radDF.drop(radDF[radDF["Observed Rise Rates"].str.contains(r'-')].index)
 radDF["Observed Rise Rates"] = (radDF["Observed Rise Rates"]).astype(float)
 radDF["Time"] = (radDF["Time"]).str.strip().astype(float)
 
@@ -77,7 +80,6 @@ plt.ylim(0, max(observedRatesMax["Observed Rise Rates"], predictedRatesMax["Pred
 plt.title("Observed vs. Predicted Balloon Rise Rates")
 plt.xlabel("Time [sec]")
 plt.ylabel("Rise Rate [m/s]")
-plt.grid()
 plt.show()
 
 

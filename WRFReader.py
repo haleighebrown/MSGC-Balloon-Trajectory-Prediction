@@ -8,7 +8,6 @@ EARTH_RADIUS = 6371.0 #km
 DEGREES_TO_RADIANS = np.pi/180.0 #simple conversion 
 RADIANS_TO_DEGREES = 180.0/np.pi #simple conversion 
 
-
 #WRF time index
 time = 0 
 

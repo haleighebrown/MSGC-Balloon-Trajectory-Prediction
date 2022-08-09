@@ -9,22 +9,17 @@ BALLOON TRAJECTORY LAT/LON COMPARISON VISUALIZATION TOOL:
 import matplotlib.pyplot as plt
 import pandas as pd
 import matplotlib.ticker as mticker
-
+plt.style.use('seaborn-whitegrid')
 
 #USER VARIABLES
-#"/home/wrf_user/Downloads/UM5_1710UTC_070622_GARY_Profile.txt"
-#"/home/wrf_user/Downloads/UM6_1700UTC_071322_ACE_profile.txt"
+radFile = "/home/wrf_user/Downloads/UM5_1710UTC_070622_GARY_Profile.txt" #location of radiosonde profile data
+predFile = "/home/wrf_user/Desktop/Prediction.csv"                       #location of prediction data
+predTimesFile = "/home/wrf_user/Desktop/times.txt"                       #location of prediction times
 
-radFile = "/home/wrf_user/Downloads/UM6_1700UTC_071322_ACE_profile.txt" #location of radiosonde profile data
-predFile = "/home/wrf_user/Desktop/Prediction.csv"                      #location of prediction data
-predTimesFile = "/home/wrf_user/Desktop/times.txt"                      #location of prediction times
+durationOL = 7052                                                        #duration of the observed launch (sec)
+startingLat = 46.859                                                     #starting lattitude (°)
+startingLon = -113.985                                                   #starting longitude (°)
 
-#7052
-#7165
-
-durationOL = 7165                                                       #duration of the observed launch (sec)
-startingLat = 46.859                                                    #starting lattitude (°)
-startingLon = -113.985                                                  #starting longitude (°)
 
 #READING IN RADIOSONDE PROFILE DATA 
 radDF = pd.read_csv(radFile, sep= "\t", skiprows = 18, encoding = 'unicode_escape')
@@ -64,7 +59,6 @@ plt.ylim(startingLat, max(observedLat["Observed Latitude"], predictedLat["Predic
 plt.title("Observed vs. Predicted Balloon Lat Lon Location")
 plt.xlabel("Lon")
 plt.ylabel("Lat")
-plt.grid()
 plt.show()
 
 
