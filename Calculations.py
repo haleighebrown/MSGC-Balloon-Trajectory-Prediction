@@ -54,7 +54,7 @@ def getDecentRate(pressure, temperature, radius, mass_balloon, mass_payload):
 def getAscentRate(surface_pressure, surface_temperature, pressure, temperature, mass_balloon, mass_payload, volume_AtLaunch, radius_AtLaunch, last_Rate): 
     #the intial volume comes from the predictedFill function
     V_surface =  float(volume_AtLaunch)
-    #V_surface = 4.0/3.0 * np.pi * 0.662432 **3 <--- this is the previous method for calc starting volume
+    #V_surface = 4.0/3.0 * np.pi * 0.662432 **3 #<--- this is the previous method for calc starting volume
 
     #density
     density = pressure/(temperature * DRY_AIR_GAS_CONSTANT)
@@ -74,7 +74,7 @@ def getAscentRate(surface_pressure, surface_temperature, pressure, temperature, 
 
     #this if statement gets an initial rise rate based on the coefficient of drag (cD) for a prefect sphere
     if pressure >= surface_pressure:
-        ascent_rate = np.sqrt((2.0 * force_bouyant)/(.6 * cross_area * density))
+        ascent_rate = np.sqrt((2.0 * force_bouyant)/(.48 * cross_area * density))
         last_Rate = ascent_rate
 
     #this statement invloves the actual calculation of reynolds number and cD
@@ -89,9 +89,7 @@ def getAscentRate(surface_pressure, surface_temperature, pressure, temperature, 
 
         #conversion factor 1000 (Re has no units so they all need to cancel)
 
-        print(density, air_Viscosity)
         Re = float(((density*last_Rate*r)/air_Viscosity)*1000)
-        
         cD = 0.04808*(np.log(Re))**2 - 1.406*(np.log(Re)) + 10.49 + .109 #this is our adjustment factor for coefficient of drag as of right now
         
         ascent_rate = np.sqrt((2.0 * force_bouyant)/(cD * cross_area * density))

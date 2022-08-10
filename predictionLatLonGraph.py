@@ -56,9 +56,11 @@ predictedLat = predDF.loc[predDF["Predicted Latitude"].idxmax()]
 plt.xlim(startingLon, max(observedLon["Observed Longitude"], predictedLon["Predicted Longitude"]) + .1)
 plt.ylim(startingLat, max(observedLat["Observed Latitude"], predictedLat["Predicted Latitude"]) + .1)
 
-plt.title("Observed vs. Predicted Balloon Lat Lon Location")
-plt.xlabel("Lon")
-plt.ylabel("Lat")
+plt.rcParams.update({'font.family':'sans-serif'})
+plt.legend(loc="upper right", fontsize=20)
+plt.title("Observed vs. Predicted Balloon Lat Lon Location", fontsize=20)
+plt.xlabel("Longitude", fontsize=20, labelpad=10)
+plt.ylabel("Latitude", fontsize=20, labelpad=10)
 plt.show()
 
 

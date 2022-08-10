@@ -55,17 +55,20 @@ plt.axvline(0, color = "black")
 
 observedBurst = radDF.loc[radDF["Observed Geopotential"].idxmax()]
 predictedBurst = predDF.loc[predDF["Predicted Geopotential"].idxmax()]
+#this code is for ploting the max alt for both predicted and observed alt
 plt.plot(observedBurst["Time"], observedBurst["Observed Geopotential"],"o:k", ms = 5)
-plt.text(observedBurst["Time"]+50, observedBurst["Observed Geopotential"]+150, str(round(observedBurst["Observed Geopotential"]/1000, 2)) + "km", {'ha': 'left'}, rotation = 0)
+plt.text(observedBurst["Time"]+100, observedBurst["Observed Geopotential"]+150, str(round(observedBurst["Observed Geopotential"]/1000, 2)) + "km", {'ha': 'left'}, rotation = 0)
 plt.plot(predictedBurst["pointTimes"], predictedBurst["Predicted Geopotential"], "o:k", ms = 5)
 plt.text(predictedBurst["pointTimes"]+100, predictedBurst["Predicted Geopotential"], str(round(predictedBurst["Predicted Geopotential"]/1000, 2)) + "km", {'ha': 'left'}, rotation = 0)
 
 plt.xlim(0, max(observedBurst["Time"], predictedBurst["pointTimes"]) + 1000)
 plt.ylim(startingGP, max(observedBurst["Observed Geopotential"], predictedBurst["Predicted Geopotential"]) + 5000)
 
-plt.title("Observed vs. Predicted Balloon Geopotential")
-plt.xlabel("Time [sec]")
-plt.ylabel("Geopotential [m]")
+plt.rcParams.update({'font.family':'sans-serif'})
+plt.legend(loc="upper right", fontsize=15)
+plt.title("Observed vs. Predicted Balloon Geopotential", fontsize=20)
+plt.xlabel("Time [sec]", fontsize=20, labelpad=10)
+plt.ylabel("Geopotential [m]", fontsize=20, labelpad=10)
 plt.show()
 
 

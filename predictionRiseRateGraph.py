@@ -77,9 +77,11 @@ plt.ylim(0, max(observedRatesMax["Observed Rise Rates"], predictedRatesMax["Pred
 #to view the descent rates, put the min as the lower limit using this line:
 #min(observedRatesMin["Observed Rise Rates"], predictedRatesMin["Predicted Rise Rates"]) - .1
 
-plt.title("Observed vs. Predicted Balloon Rise Rates")
-plt.xlabel("Time [sec]")
-plt.ylabel("Rise Rate [m/s]")
+plt.rcParams.update({'font.family':'sans-serif'})
+plt.legend(loc="upper right", fontsize=20)
+plt.title("Observed vs. Predicted Balloon Rise Rates", fontsize=20)
+plt.xlabel("Time [sec]", fontsize=20, labelpad=10)
+plt.ylabel("Rise Rate [m/s]", fontsize=20, labelpad=10)
 plt.show()
 
 

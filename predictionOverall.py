@@ -53,11 +53,13 @@ predDF["pointTimes"] = (predDF["pointTimes"]).str.strip().astype(float)
 threeD = plt.figure().gca(projection='3d')
 threeD.plot(radDF["Observed Longitude"], radDF["Observed Latitude"], radDF["Observed Geopotential"], label="Observed")
 threeD.plot(predDF["Predicted Longitude"], predDF["Predicted Latitude"], predDF["Predicted Geopotential"], label="Predicted")
-plt.legend(loc="upper right")
-threeD.set_xlabel("Longitude")
-threeD.set_ylabel("Latitude")
-threeD.set_zlabel("Geopotential")
-plt.title("Observed vs. Predicted Balloon Trajectory")
+
+plt.rcParams.update({'font.family':'sans-serif'})
+plt.legend(loc="upper right", fontsize=20)
+threeD.set_xlabel("Longitude", fontsize=20, labelpad=10)
+threeD.set_ylabel("Latitude", fontsize=20, labelpad=10)
+threeD.set_zlabel("Geopotential", fontsize=20, labelpad=10)
+plt.title("Observed vs. Predicted Balloon Trajectory", fontsize=20)
 plt.show()
 
 
